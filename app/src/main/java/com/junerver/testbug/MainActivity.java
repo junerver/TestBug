@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -15,7 +15,8 @@ import me.drakeet.multitype.MultiTypeAdapter;
 import okhttp3.Call;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-	private SuperRecyclerView mRecyclerView;
+	private RecyclerView mRecyclerView;
+	private SwipeRefreshLayout mSwipeRefreshLayout;
 	private LinearLayoutManager mLayoutManager;
 	private MultiTypeAdapter mAdapter;
 	private Gson mGson;
@@ -25,14 +26,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		mRecyclerView = (SuperRecyclerView) findViewById(R.id.rv_data_list);
+		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+		mRecyclerView = (RecyclerView) findViewById(R.id.rv_data_list);
 		mLayoutManager = new LinearLayoutManager(this);
 		mAdapter = new MultiTypeAdapter();
 		mAdapter.register(News.ResultsBean.class,new NewsViewBinder());
 		mRecyclerView.setAdapter(mAdapter);
 		mRecyclerView.setLayoutManager(mLayoutManager);
 		mGson = new Gson();
-		mRecyclerView.setRefreshListener(this);
+		mSwipeRefreshLayout.setOnRefreshListener(this);
 		getData();
 	}
 

@@ -31,6 +31,4 @@ dependencies {
     compile 'me.drakeet.multitype:multitype:2.5.0-beta'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.zhy:okhttputils:2.6.2'
-    compile 'com.orhanobut:logger:1.15'
-    compile 'com.malinskiy:superrecyclerview:1.1.4'
 }
